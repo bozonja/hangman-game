@@ -77,21 +77,23 @@ h1 {
   font-size: 30px;
 }
 
-.popup-container {
+.modal-container {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 
-  display: none;
+  display: block;
   align-items: center;
   justify-content: center;
 
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.popup {
+.modal {
+  max-width: 50%;
+  margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
 
@@ -101,7 +103,7 @@ h1 {
   text-align: center;
 }
 
-.popup button {
+.modal button {
   margin-top: 20px;
   padding: 12px 20px;
   border: 0;
@@ -113,11 +115,11 @@ h1 {
   cursor: pointer;
 }
 
-.popup button:active {
+.modal button:active {
   transform: scale(0.98);
 }
 
-.popup button:focus {
+.modal button:focus {
   outline: 0;
 }
 
