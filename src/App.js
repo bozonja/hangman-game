@@ -1,12 +1,17 @@
-import './App.css';
+import "./App.css";
+
+//components
+import Header from "./components/Header";
+import { Illustration } from "./components/Illustration";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="game-container">
+        <Illustration />
+      </div>
+    </>
   );
 }
 

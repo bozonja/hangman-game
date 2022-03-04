@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Hangman game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the [Hangman game](https://en.wikipedia.org/wiki/Hangman_(game)).
 
 ## Available Scripts
 
