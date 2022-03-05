@@ -1,9 +1,21 @@
-const Header = () => {
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const Header = ({ value }) => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/");
+  }, [value]);
+
   return (
-    <>
-      <h1>Hangman game</h1>
-      <p>Find the hidden word - Enter a letter</p>
-    </>
+    <header>
+      <h1>
+        {pathname.includes("game") && `Hi ${value}!`} Welcome to the Hangman
+        game.
+      </h1>
+    </header>
   );
 };
 
