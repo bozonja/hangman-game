@@ -17,8 +17,7 @@ function App() {
 
   //TODO: fetch random qoute from API
   const words = ["application", "programming", "interface", "wizard"];
-
-  let selectedWord = words[Math.floor(Math.random() * words.length)];
+  const selectedWord = words[Math.floor(Math.random() * words.length)];
 
   return (
     <>
@@ -33,7 +32,14 @@ function App() {
             />
             <Route
               path="/game"
-              element={<Game value={value} setValue={setValue} />}
+              element={
+                <Game
+                  value={value}
+                  setValue={setValue}
+                  selectedWord={selectedWord}
+                  correctLetters={correctLetters}
+                />
+              }
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -101,7 +101,7 @@ button:hover {
 
 .word {
   position: absolute;
-  bottom: 10px;
+  bottom: -2.5rem;
   left: 50%;
 
   display: flex;
