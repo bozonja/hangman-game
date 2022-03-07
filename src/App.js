@@ -11,6 +11,15 @@ import { NotFound } from "./components/NotFound";
 
 function App() {
   const [value, setValue] = useState("");
+  const [playable, setPlayable] = useState(true);
+  const [correctLetters, setCorrectLetters] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
+
+  //TODO: fetch random qoute from API
+  const words = ["application", "programming", "interface", "wizard"];
+
+  let selectedWord = words[Math.floor(Math.random() * words.length)];
+
   return (
     <>
       <BrowserRouter>
