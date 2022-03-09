@@ -38,6 +38,7 @@ function App() {
                   setValue={setValue}
                   selectedWord={selectedWord}
                   correctLetters={correctLetters}
+                  wrongLetters={wrongLetters}
                 />
               }
             />
