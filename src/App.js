@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 //css
 import "./App.css";
-//components
 import Header from "./components/Header";
 import { Game } from "./components/Game";
 import { Homepage } from "./components/Homepage";
 import { NotFound } from "./components/NotFound";
+
+//TODO: fetch random qoute from API
+const words = ["application", "programming", "interface", "wizard"];
+const selectedWord = words[Math.floor(Math.random() * words.length)];
 
 function App() {
   const [value, setValue] = useState("");
@@ -15,9 +17,28 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
 
-  //TODO: fetch random qoute from API
-  const words = ["application", "programming", "interface", "wizard"];
-  const selectedWord = words[Math.floor(Math.random() * words.length)];
+  useEffect(() => {
+    const handleKeydown = (event) => {
+      const { key, keyCode } = event;
+      if (playable && keyCode >= 65 && keyCode <= 90) {
+        const letter = key.toLowerCase();
+        if (selectedWord.includes(letter)) {
+          if (!correctLetters.includes(letter)) {
+            setCorrectLetters((currentLetters) => [...currentLetters, letter]);
+          } else {
+          }
+        } else {
+          if (!wrongLetters.includes(letter)) {
+            setWrongLetters((currentLetters) => [...currentLetters, letter]);
+          } else {
+          }
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [correctLetters, wrongLetters, playable]);
 
   return (
     <>
@@ -42,6 +63,7 @@ function App() {
                 />
               }
             />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
