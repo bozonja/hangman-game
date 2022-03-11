@@ -38,7 +38,7 @@ export const Game = ({
   return (
     <>
       <div className="game-container">
-        <Illustration />
+        <Illustration wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
