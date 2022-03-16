@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //css
 import "./App.css";
@@ -45,6 +45,7 @@ function App() {
                   correctLetters={correctLetters}
                   wrongLetters={wrongLetters}
                   playable={playable}
+                  setPlayable={setPlayable}
                   setCorrectLetters={setCorrectLetters}
                   setWrongLetters={setWrongLetters}
                   notification={notification}

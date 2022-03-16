@@ -1,9 +1,34 @@
-const Modal = () => {
+import { useEffect } from "react";
+
+//helpers
+import { checkForWin } from "../helpers/checkForWin";
+
+const Modal = ({ selectedWord, correctLetters, wrongLetters, setPlayable }) => {
+  let finalMessage = "";
+  let finalMessageRevealWord = "";
+  let playable = true;
+
+  if (checkForWin(selectedWord, correctLetters, wrongLetters) === "win") {
+    finalMessage = "Congratulations you won!";
+    playable = false;
+  } else if (
+    checkForWin(selectedWord, correctLetters, wrongLetters) === "lose"
+  ) {
+    finalMessage = "Sorry. You lose!";
+    finalMessageRevealWord = `The word was ${selectedWord}`;
+    playable = false;
+  }
+
+  useEffect(() => setPlayable(playable));
+
   return (
-    <div class="modal-container">
-      <div class="modal">
-        <h2></h2>
-        <h3></h3>
+    <div
+      className="modal-container"
+      style={finalMessage !== "" ? { display: "flex" } : {}}
+    >
+      <div className="modal">
+        <h2>{finalMessage}</h2>
+        <h3>{finalMessageRevealWord}</h3>
         <button>Play Again</button>
       </div>
     </div>

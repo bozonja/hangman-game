@@ -5,6 +5,7 @@ import { Illustration } from "./Illustration";
 import Word from "./Word";
 import { WrongLetters } from "./WrongLetters";
 import Notification from "./Notification";
+import Modal from "./Modal";
 //helpers
 import { showNotification as show } from "../helpers/showNotification";
 
@@ -12,6 +13,7 @@ export const Game = ({
   selectedWord,
   correctLetters,
   playable,
+  setPlayable,
   wrongLetters,
   setCorrectLetters,
   setWrongLetters,
@@ -50,6 +52,12 @@ export const Game = ({
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
       <Notification notification={notification} />
+      <Modal
+        selectedWord={selectedWord}
+        correctLetters={correctLetters}
+        wrongLetters={wrongLetters}
+        setPlayable={setPlayable}
+      />
     </>
   );
 };
