@@ -97,6 +97,7 @@ button:hover {
 
 .word {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .letter {

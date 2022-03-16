@@ -8,8 +8,14 @@ import { Homepage } from "./components/Homepage";
 import { NotFound } from "./components/NotFound";
 
 //TODO: fetch random qoute from API
-const words = ["application", "programming", "interface", "wizard"];
-const selectedWord = words[Math.floor(Math.random() * words.length)];
+const words = [
+  'Application is "so awesome", my good',
+  "programming",
+  "interface",
+  "Wizard",
+];
+const selectedWord =
+  words[Math.floor(Math.random() * words.length)].toLowerCase();
 
 function App() {
   const [value, setValue] = useState("");

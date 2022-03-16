@@ -1,12 +1,27 @@
 const Word = ({ selectedWord, correctLetters }) => {
+  const checkQuote = (letter) => {
+    if (correctLetters.includes(letter)) {
+      return letter;
+    } else if (letter.includes(",") || letter.includes('"')) {
+      return letter;
+    } else return "";
+  };
+
   return (
-    <div className="word">
-      {selectedWord.split("").map((letter, i) => (
-        <span className="letter" key={i}>
-          {correctLetters.includes(letter) ? letter : ""}
-        </span>
-      ))}
-    </div>
+    <>
+      <p>Guess a quote:</p>
+      <div className="word">
+        {selectedWord.split("").map((letter, i) => (
+          <span
+            style={{ borderBottom: letter.includes(" ") && "none" }}
+            className="letter"
+            key={i}
+          >
+            {checkQuote(letter)}
+          </span>
+        ))}
+      </div>
+    </>
   );
 };
 
