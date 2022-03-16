@@ -22,6 +22,7 @@ function App() {
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
+  const [notification, setNotification] = useState(false);
 
   return (
     <>
@@ -46,6 +47,8 @@ function App() {
                   playable={playable}
                   setCorrectLetters={setCorrectLetters}
                   setWrongLetters={setWrongLetters}
+                  notification={notification}
+                  setNotification={setNotification}
                 />
               }
             />

@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { Illustration } from "./Illustration";
 import Word from "./Word";
 import { WrongLetters } from "./WrongLetters";
+import Notification from "./Notification";
+//helpers
+import { showNotification as show } from "../helpers/showNotification";
 
 export const Game = ({
   selectedWord,
@@ -12,6 +15,8 @@ export const Game = ({
   wrongLetters,
   setCorrectLetters,
   setWrongLetters,
+  notification,
+  setNotification,
 }) => {
   useEffect(() => {
     const handleKeydown = (event) => {
@@ -22,11 +27,13 @@ export const Game = ({
           if (!correctLetters.includes(letter)) {
             setCorrectLetters((currentLetters) => [...currentLetters, letter]);
           } else {
+            show(setNotification);
           }
         } else {
           if (!wrongLetters.includes(letter)) {
             setWrongLetters((currentLetters) => [...currentLetters, letter]);
           } else {
+            show(setNotification);
           }
         }
       }
@@ -42,6 +49,7 @@ export const Game = ({
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
+      <Notification notification={notification} />
     </>
   );
 };
