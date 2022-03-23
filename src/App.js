@@ -14,7 +14,7 @@ const words = [
   "interface",
   "Wizard",
 ];
-const selectedWord =
+let selectedWord =
   words[Math.floor(Math.random() * words.length)].toLowerCase();
 
 function App() {
@@ -23,6 +23,17 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [notification, setNotification] = useState(false);
+
+  const playAgain = () => {
+    setPlayable(true);
+
+    setCorrectLetters([]);
+    setWrongLetters([]);
+
+    const random = Math.floor(Math.random() * words.length);
+
+    selectedWord = words[random].toLowerCase();
+  };
 
   return (
     <>
@@ -50,6 +61,7 @@ function App() {
                   setWrongLetters={setWrongLetters}
                   notification={notification}
                   setNotification={setNotification}
+                  playAgain={playAgain}
                 />
               }
             />

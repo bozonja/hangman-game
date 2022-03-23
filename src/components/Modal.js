@@ -3,7 +3,13 @@ import { useEffect } from "react";
 //helpers
 import { checkForWin } from "../helpers/checkForWin";
 
-const Modal = ({ selectedWord, correctLetters, wrongLetters, setPlayable }) => {
+const Modal = ({
+  selectedWord,
+  correctLetters,
+  wrongLetters,
+  setPlayable,
+  playAgain,
+}) => {
   let finalMessage = "";
   let finalMessageRevealWord = "";
   let playable = true;
@@ -29,7 +35,7 @@ const Modal = ({ selectedWord, correctLetters, wrongLetters, setPlayable }) => {
       <div className="modal">
         <h2>{finalMessage}</h2>
         <h3>{finalMessageRevealWord}</h3>
-        <button>Play Again</button>
+        <button onClick={playAgain}>Play Again</button>
       </div>
     </div>
   );

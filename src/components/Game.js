@@ -19,6 +19,7 @@ export const Game = ({
   setWrongLetters,
   notification,
   setNotification,
+  playAgain,
 }) => {
   useEffect(() => {
     const handleKeydown = (event) => {
@@ -57,6 +58,7 @@ export const Game = ({
         correctLetters={correctLetters}
         wrongLetters={wrongLetters}
         setPlayable={setPlayable}
+        playAgain={playAgain}
       />
     </>
   );
