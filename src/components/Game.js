@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 //components
 import { Illustration } from "./Illustration";
-import Word from "./Word";
+import Qoute from "./Qoute";
 import { WrongLetters } from "./WrongLetters";
 import Notification from "./Notification";
 import Modal from "./Modal";
@@ -10,7 +10,8 @@ import Modal from "./Modal";
 import { showNotification as show } from "../helpers/showNotification";
 
 export const Game = ({
-  selectedWord,
+  data,
+  error,
   correctLetters,
   playable,
   setPlayable,
@@ -26,7 +27,7 @@ export const Game = ({
       const { key, keyCode } = event;
       if (playable && keyCode >= 65 && keyCode <= 90) {
         const letter = key.toLowerCase();
-        if (selectedWord.includes(letter)) {
+        if (data.includes(letter)) {
           if (!correctLetters.includes(letter)) {
             setCorrectLetters((currentLetters) => [...currentLetters, letter]);
           } else {
@@ -45,16 +46,20 @@ export const Game = ({
 
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [correctLetters, wrongLetters, playable]);
+
   return (
     <>
       <div className="game-container">
         <Illustration wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
-        <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
+      <>
+        <Qoute data={data} correctLetters={correctLetters} />
+        <p className="error">{error}</p>
+      </>
       <Notification notification={notification} />
       <Modal
-        selectedWord={selectedWord}
+        data={data}
         correctLetters={correctLetters}
         wrongLetters={wrongLetters}
         setPlayable={setPlayable}

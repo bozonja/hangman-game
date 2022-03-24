@@ -1,7 +1,7 @@
-export const checkForWin = (word, correct, wrong) => {
+export const checkForWin = (qoute, correct, wrong) => {
   let status = "win";
 
-  word.split("").forEach((letter) => {
+  qoute.split("").forEach((letter) => {
     if (!correct.includes(letter)) {
       status = "";
     }

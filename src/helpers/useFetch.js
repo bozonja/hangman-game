@@ -1,0 +1,22 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+export const useFetch = () => {
+  const [data, setData] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://api.quotable.io/random/")
+      .then((response) => {
+        // handle success
+        setData(response.data.content);
+      })
+      .catch((error) => {
+        // handle error
+        setError(error.message);
+      });
+  }, []);
+
+  return { data, error, setData, setError };
+};

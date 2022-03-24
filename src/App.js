@@ -1,21 +1,16 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
+
 //css
 import "./App.css";
+//comps
 import Header from "./components/Header";
 import { Game } from "./components/Game";
 import { Homepage } from "./components/Homepage";
 import { NotFound } from "./components/NotFound";
-
-//TODO: fetch random qoute from API
-const words = [
-  'Application is "so awesome", my good',
-  "programming",
-  "interface",
-  "Wizard",
-];
-let selectedWord =
-  words[Math.floor(Math.random() * words.length)].toLowerCase();
+//helpers
+import { useFetch } from "./helpers/useFetch";
 
 function App() {
   const [value, setValue] = useState("");
@@ -24,21 +19,31 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [notification, setNotification] = useState(false);
 
+  const { data, error, setData, setError } = useFetch();
+
   const playAgain = () => {
     setPlayable(true);
 
     setCorrectLetters([]);
     setWrongLetters([]);
 
-    const random = Math.floor(Math.random() * words.length);
-
-    selectedWord = words[random].toLowerCase();
+    axios
+      .get("http://api.quotable.io/random/")
+      .then((response) => {
+        // handle success
+        setData(response.data.content);
+      })
+      .catch((error) => {
+        // handle error
+        setError(error.message);
+      });
   };
 
   return (
     <>
       <BrowserRouter>
         <Header value={value} setValue={setValue} />
+
         <main>
           <Routes>
             <Route
@@ -52,7 +57,8 @@ function App() {
                 <Game
                   value={value}
                   setValue={setValue}
-                  selectedWord={selectedWord}
+                  data={data}
+                  error={error}
                   correctLetters={correctLetters}
                   wrongLetters={wrongLetters}
                   playable={playable}

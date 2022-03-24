@@ -4,24 +4,22 @@ import { useEffect } from "react";
 import { checkForWin } from "../helpers/checkForWin";
 
 const Modal = ({
-  selectedWord,
+  data,
   correctLetters,
   wrongLetters,
   setPlayable,
   playAgain,
 }) => {
   let finalMessage = "";
-  let finalMessageRevealWord = "";
+  let finalMessageRevealQoute = "";
   let playable = true;
 
-  if (checkForWin(selectedWord, correctLetters, wrongLetters) === "win") {
+  if (checkForWin(data, correctLetters, wrongLetters) === "win") {
     finalMessage = "Congratulations you won!";
     playable = false;
-  } else if (
-    checkForWin(selectedWord, correctLetters, wrongLetters) === "lose"
-  ) {
+  } else if (checkForWin(data, correctLetters, wrongLetters) === "lose") {
     finalMessage = "Sorry. You lose!";
-    finalMessageRevealWord = `The word was ${selectedWord}`;
+    finalMessageRevealQoute = data;
     playable = false;
   }
 
@@ -34,7 +32,10 @@ const Modal = ({
     >
       <div className="modal">
         <h2>{finalMessage}</h2>
-        <h3>{finalMessageRevealWord}</h3>
+        <h3 className="font-regular">
+          <strong>The qoute was: </strong>
+          {finalMessageRevealQoute}
+        </h3>
         <button onClick={playAgain}>Play Again</button>
       </div>
     </div>

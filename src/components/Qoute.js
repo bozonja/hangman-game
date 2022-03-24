@@ -1,4 +1,4 @@
-const Word = ({ selectedWord, correctLetters }) => {
+const Qoute = ({ data, correctLetters }) => {
   const checkQuote = (letter) => {
     if (correctLetters.includes(letter)) {
       return letter;
@@ -10,8 +10,8 @@ const Word = ({ selectedWord, correctLetters }) => {
   return (
     <>
       <p>Guess a quote:</p>
-      <div className="word">
-        {selectedWord.split("").map((letter, i) => (
+      <div className="qoute">
+        {data.split("").map((letter, i) => (
           <span
             style={{ borderBottom: letter.includes(" ") && "none" }}
             className="letter"
@@ -25,4 +25,4 @@ const Word = ({ selectedWord, correctLetters }) => {
   );
 };
 
-export default Word;
+export default Qoute;

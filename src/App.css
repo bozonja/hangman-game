@@ -95,7 +95,7 @@ button:hover {
   font-size: 24px;
 }
 
-.word {
+.qoute {
   display: flex;
   flex-wrap: wrap;
 }
@@ -189,4 +189,13 @@ button:hover {
 
 .center-text {
   text-align: center;
+}
+
+.error {
+  color: #eb8484;
+  font-weight: 500;
+}
+
+.font-regular {
+  font-weight: 400;
 }
