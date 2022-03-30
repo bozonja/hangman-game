@@ -112,6 +112,10 @@ button:hover {
   font-size: 30px;
 }
 
+.letter:first-of-type {
+  text-transform: uppercase;
+}
+
 .modal-container {
   position: fixed;
   top: 0;

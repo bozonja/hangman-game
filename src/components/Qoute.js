@@ -1,8 +1,10 @@
 const Qoute = ({ data, correctLetters }) => {
+  const regEx = /\W/;
+
   const checkQuote = (letter) => {
     if (correctLetters.includes(letter)) {
       return letter;
-    } else if (letter.includes(",") || letter.includes('"')) {
+    } else if (regEx.test(letter)) {
       return letter;
     } else return "";
   };

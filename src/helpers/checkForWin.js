@@ -1,11 +1,18 @@
 export const checkForWin = (qoute, correct, wrong) => {
   let status = "win";
 
-  qoute.split("").forEach((letter) => {
-    if (!correct.includes(letter)) {
-      status = "";
-    }
-  });
+  const re = /\W/g;
+
+  qoute
+    .replace(re, "")
+    .split("")
+    .forEach((letter) => {
+      if (!correct.includes(letter)) {
+        status = "";
+        // } else if (re.test(letter)) {
+        //   return letter;
+      }
+    });
 
   if (wrong.length === 6) status = "lose";
 
