@@ -98,6 +98,7 @@ button:hover {
 .qoute {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .letter {
@@ -202,4 +203,8 @@ button:hover {
 
 .font-regular {
   font-weight: 400;
+}
+
+.time {
+  text-align: right;
 }

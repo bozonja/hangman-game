@@ -9,7 +9,7 @@ export const Homepage = ({ value, setValue }) => {
     e.preventDefault();
     if (re.test(value)) {
       navigate("/game");
-    } else alert("No white space, only English letters allowed!");
+    } else alert("Only English letters allowed!");
   };
 
   return (

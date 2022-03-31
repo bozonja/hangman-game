@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 //components
 import { Illustration } from "./Illustration";
@@ -22,6 +22,8 @@ export const Game = ({
   setNotification,
   playAgain,
 }) => {
+  const [seconds, setSeconds] = useState(0);
+
   useEffect(() => {
     const handleKeydown = (event) => {
       const { key, keyCode } = event;
@@ -47,6 +49,15 @@ export const Game = ({
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [correctLetters, wrongLetters, playable]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((seconds) => seconds + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  console.log(data);
+
   return (
     <>
       <div className="game-container">
@@ -58,6 +69,7 @@ export const Game = ({
         <p className="error">{error}</p>
       </>
       <Notification notification={notification} />
+      <p className="time"> Seconds played {seconds}</p>
       <Modal
         data={data}
         correctLetters={correctLetters}

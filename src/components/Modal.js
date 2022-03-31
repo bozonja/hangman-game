@@ -33,7 +33,10 @@ const Modal = ({
       <div className="modal">
         <h2>{finalMessage}</h2>
         <h3 className="font-regular">
-          <strong>The qoute was: </strong>
+          <strong>
+            {checkForWin(data, correctLetters, wrongLetters) === "lose" &&
+              "The qoute was: "}
+          </strong>
           {finalMessageRevealQoute}
         </h3>
         <button onClick={playAgain}>Play Again</button>
