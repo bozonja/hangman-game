@@ -18,5 +18,18 @@ export const useFetch = () => {
       });
   }, []);
 
-  return { data, error, setData, setError };
+  const refetch = () => {
+    axios
+      .get("http://api.quotable.io/random/")
+      .then((response) => {
+        // handle success
+        setData(response.data.content.toLowerCase());
+      })
+      .catch((error) => {
+        // handle error
+        setError(error.message);
+      });
+  };
+
+  return { data, error, refetch };
 };

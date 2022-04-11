@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
 
 //css
 import "./App.css";
@@ -19,7 +18,7 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [notification, setNotification] = useState(false);
 
-  const { data, error, setData, setError } = useFetch();
+  const { data, error, refetch } = useFetch();
 
   const playAgain = () => {
     setPlayable(true);
@@ -27,16 +26,7 @@ function App() {
     setCorrectLetters([]);
     setWrongLetters([]);
 
-    axios
-      .get("http://api.quotable.io/random/")
-      .then((response) => {
-        // handle success
-        setData(response.data.content.toLowerCase());
-      })
-      .catch((error) => {
-        // handle error
-        setError(error.message);
-      });
+    refetch();
   };
 
   return (
