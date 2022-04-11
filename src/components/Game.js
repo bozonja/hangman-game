@@ -21,6 +21,7 @@ export const Game = ({
   notification,
   setNotification,
   playAgain,
+  value,
 }) => {
   const [seconds, setSeconds] = useState(0);
 
@@ -49,14 +50,12 @@ export const Game = ({
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [correctLetters, wrongLetters, playable]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  console.log(data);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setSeconds((seconds) => seconds + 1);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <>
@@ -76,6 +75,7 @@ export const Game = ({
         wrongLetters={wrongLetters}
         setPlayable={setPlayable}
         playAgain={playAgain}
+        value={value}
       />
     </>
   );

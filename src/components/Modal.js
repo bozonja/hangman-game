@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 //helpers
 import { checkForWin } from "../helpers/checkForWin";
@@ -9,14 +10,35 @@ const Modal = ({
   wrongLetters,
   setPlayable,
   playAgain,
+  value,
 }) => {
+  const [gameWinData, setGameWinData] = useState([]);
+  const [gameWinError, setGameWinError] = useState("");
+  const [highScore, sethighScore] = useState([]);
+  const [highScoreError, sethighScoreError] = useState("");
+
   let finalMessage = "";
   let finalMessageRevealQoute = "";
   let playable = true;
+  const errors = wrongLetters.length;
 
   if (checkForWin(data, correctLetters, wrongLetters) === "win") {
     finalMessage = "Congratulations you won!";
     playable = false;
+    axios
+      .post(
+        "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores/",
+        {
+          quoteId: "",
+          length: "",
+          uniqueCharacters: "",
+          userName: value,
+          errors: errors,
+          duration: "",
+        }
+      )
+      .then((response) => setGameWinData(console.log(response.data)))
+      .catch((error) => setGameWinError(error.message));
   } else if (checkForWin(data, correctLetters, wrongLetters) === "lose") {
     finalMessage = "Sorry. You lose!";
     finalMessageRevealQoute = data;
@@ -25,23 +47,67 @@ const Modal = ({
 
   useEffect(() => setPlayable(playable));
 
+  const fetchHighScore = () => {
+    axios
+      .get(
+        "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores/"
+      )
+      .then((response) => {
+        sethighScore(response.data);
+      })
+      .catch((error) => {
+        sethighScoreError(error.message);
+      });
+  };
+
+  console.log(data);
+
   return (
-    <div
-      className="modal-container"
-      style={finalMessage !== "" ? { display: "flex" } : {}}
-    >
-      <div className="modal">
-        <h2>{finalMessage}</h2>
-        <h3 className="font-regular">
-          <strong>
-            {checkForWin(data, correctLetters, wrongLetters) === "lose" &&
-              "The qoute was: "}
-          </strong>
-          {finalMessageRevealQoute}
-        </h3>
-        <button onClick={playAgain}>Play Again</button>
+    <>
+      <div
+        className="modal-container"
+        style={finalMessage !== "" ? { display: "flex" } : {}}
+      >
+        <div className="modal">
+          <h2>{finalMessage}</h2>
+          <h3 className="font-regular">
+            <strong>
+              {checkForWin(data, correctLetters, wrongLetters) === "lose" &&
+                "The qoute was: "}
+            </strong>
+            {finalMessageRevealQoute}
+          </h3>
+          <h3 className="font-regular">
+            <strong>Your score: {100 / 1 + errors}</strong>
+            <div>
+              <button className="button modal-btn" onClick={playAgain}>
+                Play Again
+              </button>
+            </div>
+            <p className="error">{gameWinError}</p>
+            <button type="button" className="btn-link" onClick={fetchHighScore}>
+              Show highscore
+            </button>
+            <div>
+              {highScore &&
+                highScore
+                  .sort((a, b) => b.errors - a.errors)
+                  .map((item) => (
+                    <div className="user-data" key={item.id}>
+                      <p className="user-data-text">
+                        <strong>Username:</strong> {item.userName}
+                      </p>
+                      <p className="user-data-text">
+                        <strong>Score:</strong> {100 / 1 + item.errors}
+                      </p>
+                    </div>
+                  ))}
+              <p className="error">{highScoreError}</p>
+            </div>
+          </h3>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
