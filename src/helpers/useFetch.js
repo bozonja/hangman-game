@@ -10,7 +10,7 @@ export const useFetch = () => {
       .get("http://api.quotable.io/random/")
       .then((response) => {
         // handle success
-        setData(response.data.content.toLowerCase());
+        setData(response.data);
       })
       .catch((error) => {
         // handle error
@@ -23,7 +23,7 @@ export const useFetch = () => {
       .get("http://api.quotable.io/random/")
       .then((response) => {
         // handle success
-        setData(response.data.content.toLowerCase());
+        setData(response.data);
       })
       .catch((error) => {
         // handle error

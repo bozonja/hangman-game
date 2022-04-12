@@ -3,16 +3,18 @@ export const checkForWin = (qoute, correct, wrong) => {
 
   const re = /\W/g;
 
-  qoute
-    .replace(re, "")
-    .split("")
-    .forEach((letter) => {
-      if (!correct.includes(letter)) {
-        status = "";
-        // } else if (re.test(letter)) {
-        //   return letter;
-      }
-    });
+  qoute &&
+    qoute
+      .toLowerCase()
+      .replace(re, "")
+      .split("")
+      .forEach((letter) => {
+        if (!correct.includes(letter)) {
+          status = "";
+          // } else if (re.test(letter)) {
+          //   return letter;
+        }
+      });
 
   if (wrong.length === 6) status = "lose";
 

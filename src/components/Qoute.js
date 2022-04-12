@@ -13,15 +13,19 @@ const Qoute = ({ data, correctLetters }) => {
     <>
       <p>Guess a quote:</p>
       <div className="qoute">
-        {data.split("").map((letter, i) => (
-          <span
-            style={{ borderBottom: letter.includes(" ") && "none" }}
-            className="letter"
-            key={i}
-          >
-            {checkQuote(letter)}
-          </span>
-        ))}
+        {data &&
+          data.content
+            .toLowerCase()
+            .split("")
+            .map((letter, i) => (
+              <span
+                style={{ borderBottom: letter.includes(" ") && "none" }}
+                className="letter"
+                key={i}
+              >
+                {checkQuote(letter)}
+              </span>
+            ))}
       </div>
     </>
   );

@@ -22,7 +22,7 @@ const Modal = ({
   let playable = true;
   const errors = wrongLetters.length;
 
-  if (checkForWin(data, correctLetters, wrongLetters) === "win") {
+  if (checkForWin(data.content, correctLetters, wrongLetters) === "win") {
     finalMessage = "Congratulations you won!";
     playable = false;
     axios
@@ -39,9 +39,11 @@ const Modal = ({
       )
       .then((response) => setGameWinData(console.log(response.data)))
       .catch((error) => setGameWinError(error.message));
-  } else if (checkForWin(data, correctLetters, wrongLetters) === "lose") {
+  } else if (
+    checkForWin(data.content, correctLetters, wrongLetters) === "lose"
+  ) {
     finalMessage = "Sorry. You lose!";
-    finalMessageRevealQoute = data;
+    finalMessageRevealQoute = data.content;
     playable = false;
   }
 
@@ -60,7 +62,7 @@ const Modal = ({
       });
   };
 
-  console.log(data);
+  console.log(data.content);
 
   return (
     <>
@@ -72,8 +74,8 @@ const Modal = ({
           <h2>{finalMessage}</h2>
           <h3 className="font-regular">
             <strong>
-              {checkForWin(data, correctLetters, wrongLetters) === "lose" &&
-                "The qoute was: "}
+              {checkForWin(data.content, correctLetters, wrongLetters) ===
+                "lose" && "The qoute was: "}
             </strong>
             {finalMessageRevealQoute}
           </h3>

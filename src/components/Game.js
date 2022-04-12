@@ -30,7 +30,7 @@ export const Game = ({
       const { key, keyCode } = event;
       if (playable && keyCode >= 65 && keyCode <= 90) {
         const letter = key.toLowerCase();
-        if (data.includes(letter)) {
+        if (data && data.content.includes(letter)) {
           if (!correctLetters.includes(letter)) {
             setCorrectLetters((currentLetters) => [...currentLetters, letter]);
           } else {
