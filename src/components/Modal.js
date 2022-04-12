@@ -14,8 +14,9 @@ const Modal = ({
 }) => {
   const [gameWinData, setGameWinData] = useState([]);
   const [gameWinError, setGameWinError] = useState("");
-  const [highScore, sethighScore] = useState([]);
-  const [highScoreError, sethighScoreError] = useState("");
+  const [highScoreData, setHighScoreData] = useState([]);
+  const [highScoreError, setHighScoreError] = useState("");
+  const [highScore, setHighscore] = useState(false);
 
   let finalMessage = "";
   let finalMessageRevealQoute = "";
@@ -55,11 +56,12 @@ const Modal = ({
         "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores/"
       )
       .then((response) => {
-        sethighScore(response.data);
+        setHighScoreData(response.data);
       })
       .catch((error) => {
-        sethighScoreError(error.message);
+        setHighScoreError(error.message);
       });
+    setHighscore(!highScore);
   };
 
   console.log(data.content);
@@ -92,7 +94,8 @@ const Modal = ({
             </button>
             <div>
               {highScore &&
-                highScore
+                highScoreData &&
+                highScoreData
                   .sort((a, b) => b.errors - a.errors)
                   .map((item) => (
                     <div className="user-data" key={item.id}>

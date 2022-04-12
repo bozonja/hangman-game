@@ -28,7 +28,9 @@ export const Homepage = ({ value, setValue }) => {
             type="text"
             onChange={(e) => setValue(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <button className="button" type="submit">
+            Submit
+          </button>
         </div>
       </form>
     </div>
