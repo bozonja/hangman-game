@@ -21,7 +21,10 @@ const Modal = ({
   let finalMessage = "";
   let finalMessageRevealQoute = "";
   let playable = true;
+  const qoute = data.content;
   const errors = wrongLetters.length;
+  const regEx = /\W/g;
+  const qouteUniqueCharacters = data && qoute.match(regEx).length;
 
   if (checkForWin(data.content, correctLetters, wrongLetters) === "win") {
     finalMessage = "Congratulations you won!";
@@ -30,9 +33,9 @@ const Modal = ({
       .post(
         "https://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores/",
         {
-          quoteId: "",
-          length: "",
-          uniqueCharacters: "",
+          quoteId: data._id,
+          length: data.length,
+          uniqueCharacters: qouteUniqueCharacters,
           userName: value,
           errors: errors,
           duration: "",
@@ -64,7 +67,7 @@ const Modal = ({
     setHighscore(!highScore);
   };
 
-  console.log(data.content);
+  // console.log(data && data.content);
 
   return (
     <>
