@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 export const useFetch = () => {
   const [data, setData] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://api.quotable.io/random/")
       .then((response) => {
@@ -15,6 +17,9 @@ export const useFetch = () => {
       .catch((error) => {
         // handle error
         setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -28,8 +33,11 @@ export const useFetch = () => {
       .catch((error) => {
         // handle error
         setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
-  return { data, error, refetch };
+  return { data, error, loading, refetch };
 };

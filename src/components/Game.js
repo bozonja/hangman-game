@@ -12,6 +12,7 @@ import { showNotification as show } from "../helpers/showNotification";
 export const Game = ({
   data,
   error,
+  loading,
   correctLetters,
   playable,
   setPlayable,
@@ -60,6 +61,7 @@ export const Game = ({
   return (
     <>
       <div className="game-container">
+        {loading && <h1>Loading...</h1>}
         <Illustration wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
       </div>

@@ -18,7 +18,7 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [notification, setNotification] = useState(false);
 
-  const { data, error, refetch } = useFetch();
+  const { data, error, loading, refetch } = useFetch();
 
   const playAgain = () => {
     setPlayable(true);
@@ -49,6 +49,7 @@ function App() {
                   setValue={setValue}
                   data={data}
                   error={error}
+                  loading={loading}
                   correctLetters={correctLetters}
                   wrongLetters={wrongLetters}
                   playable={playable}
