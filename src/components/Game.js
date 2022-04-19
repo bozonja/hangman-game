@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 //components
 import { Illustration } from "./Illustration";
@@ -8,6 +8,7 @@ import Notification from "./Notification";
 import Modal from "./Modal";
 //helpers
 import { showNotification as show } from "../helpers/showNotification";
+import { checkForWin } from "../helpers/checkForWin";
 
 export const Game = ({
   data,
@@ -23,8 +24,10 @@ export const Game = ({
   setNotification,
   playAgain,
   value,
+  duration,
+  setDuration,
 }) => {
-  const [seconds, setSeconds] = useState(0);
+  const timer = useRef();
 
   useEffect(() => {
     const handleKeydown = (event) => {
@@ -51,12 +54,18 @@ export const Game = ({
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [correctLetters, wrongLetters, playable]);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setSeconds((seconds) => seconds + 1);
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      setDuration((duration) => duration + 1000);
+    }, 1000);
+  }, []);
+
+  if (checkForWin(data.content, correctLetters, wrongLetters) === "win") {
+    clearInterval(timer.current);
+  }
+  if (checkForWin(data.content, correctLetters, wrongLetters) === "lose") {
+    clearInterval(timer.current);
+  }
 
   return (
     <>
@@ -70,7 +79,7 @@ export const Game = ({
         <p className="error">{error}</p>
       </>
       <Notification notification={notification} />
-      <p className="time"> Seconds played {seconds}</p>
+      <p className="time"> Time played(in miliSeconds) {duration}</p>
       <Modal
         data={data}
         correctLetters={correctLetters}
@@ -78,6 +87,7 @@ export const Game = ({
         setPlayable={setPlayable}
         playAgain={playAgain}
         value={value}
+        duration={duration}
       />
     </>
   );

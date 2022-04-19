@@ -11,6 +11,7 @@ const Modal = ({
   setPlayable,
   playAgain,
   value,
+  duration,
 }) => {
   const [gameWinData, setGameWinData] = useState([]);
   const [gameWinError, setGameWinError] = useState("");
@@ -38,7 +39,7 @@ const Modal = ({
           uniqueCharacters: qouteUniqueCharacters,
           userName: value,
           errors: errors,
-          duration: "",
+          duration: duration,
         }
       )
       .then((response) => setGameWinData(console.log(response.data)))
@@ -67,7 +68,7 @@ const Modal = ({
     setHighscore(!highScore);
   };
 
-  // console.log(data && data.content);
+  console.log(data && data.content);
 
   return (
     <>

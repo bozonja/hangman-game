@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //css
@@ -10,6 +10,7 @@ import { Homepage } from "./components/Homepage";
 import { NotFound } from "./components/NotFound";
 //helpers
 import { useFetch } from "./helpers/useFetch";
+import { checkForWin } from "./helpers/checkForWin";
 
 function App() {
   const [value, setValue] = useState("");
@@ -17,8 +18,11 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [notification, setNotification] = useState(false);
+  const [duration, setDuration] = useState(1000);
 
   const { data, error, loading, refetch } = useFetch();
+
+  const timer = useRef();
 
   const playAgain = () => {
     setPlayable(true);
@@ -27,7 +31,18 @@ function App() {
     setWrongLetters([]);
 
     refetch();
+    setDuration(0);
+    timer.current = setInterval(() => {
+      setDuration((duration) => duration + 1000);
+    }, 1000);
   };
+
+  if (checkForWin(data.content, correctLetters, wrongLetters) === "win") {
+    clearInterval(timer.current);
+  }
+  if (checkForWin(data.content, correctLetters, wrongLetters) === "lose") {
+    clearInterval(timer.current);
+  }
 
   return (
     <>
@@ -59,6 +74,8 @@ function App() {
                   notification={notification}
                   setNotification={setNotification}
                   playAgain={playAgain}
+                  duration={duration}
+                  setDuration={setDuration}
                 />
               }
             />
