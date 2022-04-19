@@ -18,7 +18,7 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [notification, setNotification] = useState(false);
-  const [duration, setDuration] = useState(1000);
+  const [duration, setDuration] = useState(0);
 
   const { data, error, loading, refetch } = useFetch();
 
@@ -48,7 +48,6 @@ function App() {
     <>
       <BrowserRouter>
         <Header value={value} setValue={setValue} />
-
         <main>
           <Routes>
             <Route

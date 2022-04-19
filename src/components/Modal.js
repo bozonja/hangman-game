@@ -68,8 +68,6 @@ const Modal = ({
     setHighscore(!highScore);
   };
 
-  console.log(data && data.content);
-
   return (
     <>
       <div

@@ -1,13 +1,7 @@
-// import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Header = ({ value }) => {
   const { pathname } = useLocation();
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   navigate("/");
-  // }, [value]);
 
   return (
     <header>

@@ -10,7 +10,6 @@ export const Illustration = ({ wrongLetters }) => {
       <line x1="20" y1="230" x2="100" y2="230" />
       {/* <!-- Head --> */}
       {errors > 0 && <circle cx="140" cy="70" r="20" />}
-
       {/* <!-- Body --> */}
       {errors > 1 && <line x1="140" y1="90" x2="140" y2="150" />}
       {/* <!-- Arms --> */}

@@ -1,6 +1,5 @@
 export const checkForWin = (qoute, correct, wrong) => {
   let status = "win";
-
   const re = /\W/g;
 
   qoute &&
@@ -11,8 +10,6 @@ export const checkForWin = (qoute, correct, wrong) => {
       .forEach((letter) => {
         if (!correct.includes(letter)) {
           status = "";
-          // } else if (re.test(letter)) {
-          //   return letter;
         }
       });
 
