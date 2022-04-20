@@ -11,6 +11,7 @@ import { NotFound } from "./components/NotFound";
 //helpers
 import { useFetch } from "./helpers/useFetch";
 import { checkForWin } from "./helpers/checkForWin";
+import { ValueContext } from "./helpers/Context";
 
 function App() {
   const [value, setValue] = useState("");
@@ -47,41 +48,36 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header value={value} setValue={setValue} />
-        <main>
-          <Routes>
-            <Route
-              path="/"
-              exact
-              element={<Homepage value={value} setValue={setValue} />}
-            />
-            <Route
-              path="/game"
-              element={
-                <Game
-                  value={value}
-                  setValue={setValue}
-                  data={data}
-                  error={error}
-                  loading={loading}
-                  correctLetters={correctLetters}
-                  wrongLetters={wrongLetters}
-                  playable={playable}
-                  setPlayable={setPlayable}
-                  setCorrectLetters={setCorrectLetters}
-                  setWrongLetters={setWrongLetters}
-                  notification={notification}
-                  setNotification={setNotification}
-                  playAgain={playAgain}
-                  duration={duration}
-                  setDuration={setDuration}
-                />
-              }
-            />
-
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
+        <ValueContext.Provider value={{ value, setValue }}>
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" exact element={<Homepage />} />
+              <Route
+                path="/game"
+                element={
+                  <Game
+                    data={data}
+                    error={error}
+                    loading={loading}
+                    correctLetters={correctLetters}
+                    wrongLetters={wrongLetters}
+                    playable={playable}
+                    setPlayable={setPlayable}
+                    setCorrectLetters={setCorrectLetters}
+                    setWrongLetters={setWrongLetters}
+                    notification={notification}
+                    setNotification={setNotification}
+                    playAgain={playAgain}
+                    duration={duration}
+                    setDuration={setDuration}
+                  />
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </ValueContext.Provider>
       </BrowserRouter>
     </>
   );

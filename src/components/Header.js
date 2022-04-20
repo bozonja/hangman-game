@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 
-const Header = ({ value }) => {
+//helpers
+import { ValueContext } from "../helpers/Context";
+
+const Header = () => {
   const { pathname } = useLocation();
+  const { value } = useContext(ValueContext);
 
   return (
     <header>

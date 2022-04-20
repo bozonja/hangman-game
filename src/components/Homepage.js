@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Homepage = ({ value, setValue }) => {
+//helpers
+import { ValueContext } from "../helpers/Context";
+
+export const Homepage = () => {
+  const { value, setValue } = useContext(ValueContext);
   const navigate = useNavigate();
 
   const re = /^[A-Za-z]+$/;

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 //helpers
 import { checkForWin } from "../helpers/checkForWin";
+import { ValueContext } from "../helpers/Context";
 
 const Modal = ({
   data,
@@ -10,7 +11,6 @@ const Modal = ({
   wrongLetters,
   setPlayable,
   playAgain,
-  value,
   duration,
 }) => {
   const [gameWinData, setGameWinData] = useState([]);
@@ -26,6 +26,7 @@ const Modal = ({
   const errors = wrongLetters.length;
   const regEx = /\W/g;
   const qouteUniqueCharacters = data && qoute.match(regEx).length;
+  const { value } = useContext(ValueContext);
 
   if (checkForWin(data.content, correctLetters, wrongLetters) === "win") {
     finalMessage = "Congratulations you won!";

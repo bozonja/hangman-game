@@ -23,7 +23,6 @@ export const Game = ({
   notification,
   setNotification,
   playAgain,
-  value,
   duration,
   setDuration,
 }) => {
@@ -86,7 +85,6 @@ export const Game = ({
         wrongLetters={wrongLetters}
         setPlayable={setPlayable}
         playAgain={playAgain}
-        value={value}
         duration={duration}
       />
     </>
