@@ -78,7 +78,6 @@ export const Game = ({
         <p className="error">{error}</p>
       </>
       <Notification notification={notification} />
-      <p className="time"> Time played(in miliSeconds) {duration}</p>
       <Modal
         data={data}
         correctLetters={correctLetters}
